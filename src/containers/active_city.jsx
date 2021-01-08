@@ -4,19 +4,22 @@ import { connect } from 'react-redux';
 // eslint-disable-next-line react/prefer-stateless-function
 class ActiveCity extends React.Component {
   render() {
-    let city = null;
     const url = `https://kitt.lewagon.com/placeholder/cities/${this.props.activeCity.slug}`;
-    if (this.props.activeCity) {
+    if (!this.props.activeCity.address) {
       // eslint-disable-next-line react/jsx-wrap-multilines
-      city = <div>
-        <h2>{this.props.activeCity.name}</h2>
-        <p>{this.props.activeCity.address}</p>
-        <img src={url} alt="" />
-      </div>;
+      return (
+        <div>
+          <h2>Select a city ...</h2>
+        </div>
+      );
     }
     return (
       <div className="active-city">
-        {city}
+        <div>
+          <h2>{this.props.activeCity.name}</h2>
+          <p>{this.props.activeCity.address}</p>
+          <img src={url} width="100%" />
+        </div>
       </div>
     );
   }
